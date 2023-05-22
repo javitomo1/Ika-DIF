@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--  Font Awesome  -->
+  <script src="https://kit.fontawesome.com/31370fad5f.js" crossorigin="anonymous"></script>
+  <!--  CSS  -->
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!--  Google Fonts  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <!-- Scripts -->
+  <!-- <script src="app.js" defer></script> -->
+  <!-- Title -->
+  <title>Ika DIF</title>
+  <style>
+    body {
+      background-image: url(img/background.jpg);
+      color: rgb(114,59,3);
+      font-size: 1.4rem;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    table {
+      border-collapse: collapse;
+      font-size: 1.1rem;
+      background-color: rgb(248, 238, 197);
+    }
+    
+    th, td {
+      border: 1px solid black;
+    }
+    thead > tr > th {
+      width: 110px;
+    }
+    td > input {
+      text-align: center;
+    }
+    .diferencia{
+      text-align: center;
+    }
+    .dif-w65 {
+      width: 65px;
+      padding: 0;
+    }
+    .num1, .num2 {
+      border: none;
+      font-size: 1.1rem;
+      background-color: rgb(248, 238, 197);
+    }
+    .num1:focus {
+        outline: 1px solid rgb(114,59,3);
+        background: inherit;
+        border: none;
+    }
+    .num2:focus {
+        outline: 1px solid rgb(114,59,3);
+        background: inherit;
+        border: none;
+    }
+    textarea {
+      resize: none;
+      width: 50%;
+      font-size: 1.1rem;
+      background-color: rgb(248, 238, 197);
+      color: rgb(114,59,3);
+      font-family: 'Roboto mono';
+    }
+    textarea::placeholder {
+      padding: 5px;
+      text-align: justify;
+      color: rgb(207, 180, 153);
+    }
+    #valor {
+      width: 146px;
+    }
+    .dif-contenedor {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .dif-contenedor-datos {
+      width: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .dif-botones {
+      padding: 0 10px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: space-evenly; */
+      gap: 5px;
+    }
+    .dif-btn-borrar {
+      background: #f44336;
+      border: none;
+      font-size: 1.1rem;
+      color: rgb(114,59,3);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .dif-btn-borrar:active {
+      background: #e57373;
+    }
+    .dif-btn-calculo {
+      background: #4caf50;
+      border: none;
+      font-size: 1.1rem;
+      color: rgb(114,59,3);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .dif-btn-calculo:active {
+      background: #8bc34a;
+    }
+    p {
+      text-align: justify;
+    }
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .dif-contenedor-textarea {
+      display: flex;
+    }
+    #valor {
+      padding: 0 5px;
+      width: 50%;
+      font-size: 1.3rem;
+      outline: 1px solid rgb(114,59,3);
+      border: none;
+      border-radius: 3px;
+      background: inherit;
+      color: rgb(114,59,3);
+    }
+    #valor::placeholder {
+      padding: 5px;
+      text-align: justify;
+      color: rgb(203, 153, 102);
+
+    }
+    .autor {
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.2rem;
+      padding-top: 40px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal img {
+      display: block;
+      margin: auto;
+      max-width: 80%;
+      max-height: 80%;
+      margin-top: 10%;
+    }
+
+    .modal .cerrar {
+      color: red;
+      font-size: 60px;
+      font-weight: bold;
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      cursor: pointer;
+    }
+    #abrirModal {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #4282d7;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    footer p {
+      color: rgb(114,59,3);
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.2rem;
+      padding-top: 30px;
+    }
+    .link {
+      text-align: center;
+      padding-bottom: 20px;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+    .pi-contenedor-marco {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+    }
+    .pi-header-contenedor-tabla{
+        width: 700px;
+        height: 40px;
+        background-image: url(img/bg_head_left.png), url(img/bg_head.png), url(img/bg_body_left.png), url(img/bg_body_right.png);
+        background-position: left top, right top, left top, right top;
+        background-repeat: repeat-y, repeat-y, repeat-y, repeat-y;  
+    }
+    .pi-contenedor-tabla {
+        background-image: url(img/bg_body_left.png), url(img/bg_body_right.png); 
+        background-position: left bottom, right bottom;
+        background-repeat: repeat-y, repeat-y;
+        width: 700px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    .pi-footer-contenedor-tabla {
+        background-image: url(img/bg_footer_l.png), url(img/bg_footer_r.png), url(img/bg_footer_pat.png);
+        background-position: bottom left, bottom right, bottom left;
+        background-repeat: no-repeat, no-repeat, repeat-x;
+        width: 720px;
+        height: 57px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        flex-wrap: wrap;
+        border-radius: 5px;
+    }
+    #abrirModal {
+      display: inline;
+      color: #1957a8;
+      cursor: pointer;
+      font-size: 1.4rem;
+    }
+    .inline {
+      display: inline;
+    }
+    .banner {
+      width: 100%;
+    }
+    .img-container {
+      
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="dif-contenedor">
+    <div class="dif-contenedor-datos">
+      <div class="dif-contenedor-descripcion">
+        <h1>Calculadora Ika-DIF</h1>
+        <p>Calculadora Ika-DIF es una herramienta que le permite calcular cuando material le falta o sobra en una polis dependiendo de la cantidad que desea tener.</p>
+        <p>Puede introducir manualmente datos en la tabla para el cálculo o introducir en "Material para todas las polis" una cantidad que se asignará a la tabla automáticamente.</p>
+      </div>
+      <label for="valor">Material para todas las polis: <input type="number" id="valor" placeholder="Material futuro" /></label>
+      
+      
+      <p class="inline">Para agilizar la operación, puede copiar la <span id="abrirModal">tabla de recursos de la función premium de ikariam</span> e introducirla para extraer los datos y hacer el cálculo al pulsar el botón Calcular.</p>
+      <div class="dif-contenedor-textarea">
+        <textarea id="tablaUser" rows="10" cols="50" placeholder="Pegue su tabla aquí"></textarea>
+        <div class="dif-botones">
+          <button class="dif-btn-calculo" onclick="extraerDatos()">Calcular</button>
+          <button class="dif-btn-borrar" onclick="limpiarTabla()">Borrar Todo</button>
+          <div id="miModal" class="modal">
+            <span class="cerrar">&times;</span>
+            <img src="img/modal.jpg" alt="Imagen del modal">
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="pi-contenedor-marco">
+      <div class="pi-header-contenedor-tabla"></div>
+      <div class="pi-contenedor-tabla">
+        <table id="tabla">
+          <thead>
+            <tr>
+              <th class="img-container" colspan="4"><img class="banner" src="img/ika-dif-banner-tabla.jpg"></th>
+            </tr>
+            <tr>
+              <th class="dif-w65">Polis</th>
+              <th>Material actual</th>
+              <th>Material futuro</th>
+              <th>Diferencia</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <th>1</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>4</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>5</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>6</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>7</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>8</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>9</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>10</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>11</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>12</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>13</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>14</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>15</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>16</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>17</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>18</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>19</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>20</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+              <tr>
+                <th>21</th>
+                <td><input type="number" class="num1" onchange="calcularDiferencia(this)" /></td>
+                <td><input type="number" class="num2" onchange="calcularDiferencia(this)" /></td>
+                <td class="diferencia"></td>
+              </tr>
+            <!-- Repite los tr anteriores para las demás filas -->
+          </tbody>
+        </table>
+      </div>
+      <div class="pi-footer-contenedor-tabla"></div>
+    </div>
+  </div>
+  <footer>
+    <p>by Astralis</p>
+    <a class="link" href="https://primospython.com/calculadora-pi.html">Calculadora Ika-PI</a>
+  </footer>
+  <script>
+    function calcularDiferencia(input) {
+      var fila = input.parentNode.parentNode;
+      var num1 = parseFloat(fila.querySelector('.num1').value) || 0;
+      var num2 = parseFloat(fila.querySelector('.num2').value) || 0;
+      var diferencia = num2 - num1;
+      fila.querySelector('.diferencia').innerHTML = diferencia;
+    }
+
+    var valorInput = document.getElementById('valor');
+    valorInput.addEventListener('input', function() {
+      var num2Inputs = document.getElementsByClassName('num2');
+      for (var i = 0; i < num2Inputs.length; i++) {
+        num2Inputs[i].value = valorInput.value;
+        calcularDiferencia(num2Inputs[i]);
+      }
+    });
+
+    function extraerDatos() {
+      var tablaUser = document.getElementById('tablaUser').value;
+      var filas = tablaUser.split("\n");
+      var celdas = [];
+
+      for (var i = 0; i < filas.length; i++) {
+        var datosFila = filas[i].split("\t");
+        if (datosFila.length >= 2) {
+          celdas.push(datosFila[1].trim().replace(/,/g, ""));
+        }
+      }
+      var num1Inputs = document.getElementsByClassName('num1');
+      for (var i = 0; i < num1Inputs.length; i++) {
+        if (i < celdas.length) {
+          num1Inputs[i].value = celdas[i];
+          calcularDiferencia(num1Inputs[i]);
+        } else {
+          num1Inputs[i].value = '';
+          calcularDiferencia(num1Inputs[i]);
+        }
+      }
+    }
+
+    var num1Inputs = document.getElementsByClassName('num1');
+    for (var i = 0; i < num1Inputs.length; i++) {
+      num1Inputs[i].addEventListener('input', function() {
+        calcularDiferencia(this);
+      });
+    }
+
+    var num2Inputs = document.getElementsByClassName('num2');
+    for (var i = 0; i < num2Inputs.length; i++) {
+      num2Inputs[i].addEventListener('input', function() {
+        calcularDiferencia(this);
+      });
+    }
+
+    function limpiarTabla() {
+      var num1Inputs = document.getElementsByClassName('num1');
+      var num2Inputs = document.getElementsByClassName('num2');
+      var diferenciaCells = document.getElementsByClassName('diferencia');
+
+      for (var i = 0; i < num1Inputs.length; i++) {
+        num1Inputs[i].value = '';
+      }
+
+      for (var i = 0; i < num2Inputs.length; i++) {
+        num2Inputs[i].value = '';
+      }
+
+      for (var i = 0; i < diferenciaCells.length; i++) {
+        diferenciaCells[i].textContent = '';
+      }
+      valorInput.value = '';
+      tablaUser.value = '';
+    }
+
+    document.getElementById("abrirModal").addEventListener("click", function() {
+    document.getElementById("miModal").style.display = "block";
+    });
+
+    document.getElementsByClassName("cerrar")[0].addEventListener("click", function() {
+      document.getElementById("miModal").style.display = "none";
+    });
+  </script>
+</body>
+</html>
